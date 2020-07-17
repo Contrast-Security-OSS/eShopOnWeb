@@ -6,6 +6,19 @@ services:
     build:
       context: .
       dockerfile: src/Web/Dockerfile
+    environment:
+      - CORECLR_PROFILER_PATH_64=/app/contrast/runtimes/linux-x64/native/ContrastProfiler.so
+      - CORECLR_PROFILER={8B2CE134-0948-48CA-A4B2-80DDAD9F5791}
+      - CORECLR_ENABLE_PROFILING=1
+      - CONTRAST__APPLICATION__NAME=eShoppeOnWeb
+      - CONTRAST__SERVER__NAME=DockerDotNETServer
+      - CONTRAST_CORECLR_LOGS_DIRECTORY=/dev/stdout
+      - CONTRAST__AGENT__LOGGER__LEVEL=INFO
+      - CONTRAST__API__URL=https://app.contrastsecurity.com/Contrast  # Update with teamserver URL if differs key see CONTRAST.md
+      - CONTRAST__API__API_KEY={agent API KEY}                        # Update with agent API key see CONTRAST.md
+      - CONTRAST__API__SERVICE_KEY={agent Service key}                # Update with agent service key see CONTRAST.md
+      - CONTRAST__API__USER_NAME={agent user name}                    # Update with agent user name see CONTRAST.md
+
   eshoppublicapi:
     image: ${DOCKER_REGISTRY-}eshoppublicapi
     build:

@@ -13,8 +13,9 @@ WORKDIR /app
 COPY *.sln .
 COPY . .
 WORKDIR /app/src/Web
+# Add contrast sensor package
+RUN dotnet add package Contrast.SensorsNetCore --version 1.5.11
 RUN dotnet restore
-
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
